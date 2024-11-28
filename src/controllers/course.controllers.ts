@@ -1,6 +1,7 @@
 //import {userSchema} from "../models/course.model";
 import { t } from "elysia";
 import db from "../models/course.models";
+import { AllCourses } from "../models/course.models";
 import { successResponse, errorResponse } from "../utils/responseHandler";
 export const createCourse = async ({ body }) => {
   try {
@@ -30,6 +31,10 @@ export const createCourseSchema = {
   }),
 };
 
+export const fetchAllCourses = () => {
+  return AllCourses();
+};
+
 export const getAllCourses = async ({ query }) => {
   try {
     const limit = query.limit;
@@ -48,12 +53,12 @@ export const getAllCourses = async ({ query }) => {
         $level: level,
         $limit: limit,
         $sort: sort,
-        $page: page,
+        //$page: page,
         $offset: offset,
       });
     return successResponse(data, "List of all the courses");
   } catch (error: any) {
-    throw new Error(`Failed to create course: ${error.message}`);
+    throw new Error(`Failed to get courses: ${error.message}`);
   }
 };
 

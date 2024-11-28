@@ -1,15 +1,9 @@
 import { createDb } from "../db/db";
 const db = createDb();
 
-db.run(`
-    CREATE TABLE IF NOT EXISTS courses (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT NOT NULL,
-      description TEXT,
-      price REAL NOT NULL,
-      level TEXT NOT NULL
-    )
-  `);
+export const AllCourses = () => {
+  return db.query("SELECT * FROM courses").all();
+};
 
 export default db;
 

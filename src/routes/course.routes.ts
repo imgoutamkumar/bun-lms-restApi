@@ -10,9 +10,11 @@ import {
   getCourseByIdSchema,
   updateCourseByIdSchema,
   deleteCourseByIdSchema,
+  fetchAllCourses,
 } from "../controllers/course.controllers";
 
 const courseRoutes = new Elysia({ prefix: "/courses" })
+  .get("/allCourses", () => fetchAllCourses)
   .get("/", ({ query }) => getAllCourses({ query }), getAllCoursesSchema)
   .post("/", ({ body }) => createCourse({ body }), createCourseSchema)
   .get("/:id", ({ params }) => getCourseById({ params }), getCourseByIdSchema)
